@@ -5,6 +5,8 @@ import com.learning.digitalLibrary.entity.BookEntity;
 import com.learning.digitalLibrary.repository.jpa.BookJPARepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class BookRepository {
 
@@ -24,5 +26,9 @@ public class BookRepository {
 
     public void deleteBook(int id){
         this.bookJPARepository.deleteById(id);
+    }
+
+    public List<BookEntity> getAllBookDetails(){
+        return this.bookJPARepository.findAll();
     }
 }

@@ -4,6 +4,8 @@ import com.learning.digitalLibrary.entity.BookEntity;
 import com.learning.digitalLibrary.repository.impl.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookService {
 
@@ -23,5 +25,9 @@ public class BookService {
 
     public void deleteBookDetails(int id){
          this.bookRepository.deleteBook(id);
+    }
+
+    public List<BookEntity> getAllBooks(){
+        return this.bookRepository.getAllBookDetails();
     }
 }
