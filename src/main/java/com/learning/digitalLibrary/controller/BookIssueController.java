@@ -1,15 +1,16 @@
 package com.learning.digitalLibrary.controller;
 
 import com.learning.digitalLibrary.dto.BookIssueDto;
+import com.learning.digitalLibrary.entity.BookEntity;
 import com.learning.digitalLibrary.entity.BookIssueEntity;
 import com.learning.digitalLibrary.mapper.dto.BookIssueDtoMapper;
+import com.learning.digitalLibrary.record.BookIssueCount;
 import com.learning.digitalLibrary.service.BookIssueService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -35,5 +36,17 @@ public class BookIssueController {
         }catch(IllegalArgumentException ex){
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.FORBIDDEN);
         }
+    }
+
+    @GetMapping(path = "/user/{userId}")
+    public ResponseEntity<?> getAllActiveBookRelatedToUser(@PathVariable int userId){
+        List<BookEntity> bookEntities = this.bookIssueService.getAllActiveBookIssuedByUser(userId);
+        return new ResponseEntity<>(bookEntities, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/top/{n}")
+    public ResponseEntity<?> getTopNIssuedBooks(@PathVariable int n){
+        List<BookIssueCount> bookCount = this.bookIssueService.getMostIssuesBooks(n);
+        return new ResponseEntity<>(bookCount, HttpStatus.OK);
     }
 }

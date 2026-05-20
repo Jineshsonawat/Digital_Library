@@ -1,3 +1,20 @@
+Digital Library features
+
+1. Adding users (Done)
+2. Adding books (Done)
+3. Users can issue books for 14 days only. (Done)
+4. User is a student/admin (Not Required)
+5. Plus/Pro/Premium (Done)
+6. Search by author or title
+7. Login (if we had UI) (Not Required)
+8. Maintaining all the books people have borrowed/issued (Done)
+9. Search/List all books (Done)
+10. Top n most borrowed books. (Done)
+11. Show all the books that user has taken. (Done)
+
+
+Steps to complete the features
+
 1. Create a new Spring Boot Project
 2. Connect with Postgres
 3. Create User Entity with
@@ -7,22 +24,18 @@
    - email
    - date of birth (use LocalDate class)
 4. Create JPA Repository
-
 5. Create UserRepository & User Service & Controller
 6. Add a functionality of adding a new user to the DB
 7. You must not add a user in the DB with the same email address
    i.e. email must always be unique.
 8. If someone tries to add a user with duplicate email
    or malformed email, throw a response with status code [400 - BAD_REQUEST]
-
 9. Create CRUD for Books
    - id
    - name
    - author
    - price (float/double)
    - isbn (unique = true)
-
-HW
 10. Adding CRUD operations to users
 11. Adding CRUD for book issue
     - find by User (active)
@@ -31,5 +44,13 @@ HW
     if the no is less than their subscription type allowance
         then issue
     else throw exception and show Response Code - 403 FORBIDDEN
+
+...................................................................................
+Some Concepts used here that is useful.
+
+Liquibase
+Pageable (Limit and Offset)
+RequestMapping have path and if we want to listen that path then use GetMapping without path
+Count return Long
 
 

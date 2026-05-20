@@ -1,10 +1,14 @@
 package com.learning.digitalLibrary.service;
 
+import com.learning.digitalLibrary.entity.BookEntity;
 import com.learning.digitalLibrary.entity.BookIssueEntity;
 import com.learning.digitalLibrary.entity.UserEntity;
+import com.learning.digitalLibrary.record.BookIssueCount;
 import com.learning.digitalLibrary.repository.impl.BookIssueRepository;
 import com.learning.digitalLibrary.repository.impl.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -24,6 +28,19 @@ public class BookIssueService {
         }
         throw new IllegalArgumentException("Subscription Limit Reached");
 
+    }
+
+    public List<BookIssueCount> getMostIssuesBooks(int n){
+       return this.bookIssueRepository.getTopNIssuesBooks(n);
+    }
+
+    public List<BookEntity> getAllActiveBookIssuedByUser(int userId){
+        List<BookEntity> bookEntity = this.bookIssueRepository.issuedBookDetails(userId)
+                .stream()
+                .map(BookIssueEntity::getBookEntity)
+                .toList();
+
+        return bookEntity;
     }
 
     public boolean isUserCanIssueBook(int userId){
